@@ -30,7 +30,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="iGr-xM-jqy" userLabel="Cell Image">
-                                                    <rect key="frame" x="16" y="1" width="361" height="213"/>
+                                                    <rect key="frame" x="16" y="4" width="361" height="212"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="16"/>
@@ -62,7 +62,7 @@
                                                 <constraint firstItem="cwT-mL-bOo" firstAttribute="top" secondItem="iGr-xM-jqy" secondAttribute="top" id="chc-et-Z2O"/>
                                                 <constraint firstAttribute="trailing" secondItem="iGr-xM-jqy" secondAttribute="trailing" constant="16" id="d1i-1M-q3l"/>
                                                 <constraint firstItem="iGr-xM-jqy" firstAttribute="top" secondItem="ccZ-ag-xAd" secondAttribute="top" constant="4" id="i0r-9W-bgU"/>
-                                                <constraint firstItem="Vpk-yz-wZ1" firstAttribute="bottom" secondItem="iGr-xM-jqy" secondAttribute="bottom" constant="8" id="nOc-1L-k0Q"/>
+                                                <constraint firstItem="Vpk-yz-wZ1" firstAttribute="bottom" secondItem="iGr-xM-jqy" secondAttribute="bottom" constant="-8" id="nOc-1L-k0Q"/>
                                                 <constraint firstItem="iGr-xM-jqy" firstAttribute="leading" secondItem="ccZ-ag-xAd" secondAttribute="leading" constant="16" id="tqA-Re-Wow"/>
                                             </constraints>
                                         </tableViewCellContentView>
