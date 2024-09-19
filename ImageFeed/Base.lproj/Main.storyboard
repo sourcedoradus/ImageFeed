@@ -71,6 +71,7 @@
                                             <outlet property="cellImage" destination="iGr-xM-jqy" id="kLP-og-STE"/>
                                             <outlet property="dateLabel" destination="Vpk-yz-wZ1" id="F1b-rF-SNj"/>
                                             <outlet property="likeButton" destination="cwT-mL-bOo" id="XG6-u3-JsK"/>
+                                            <segue destination="gSj-bC-N5g" kind="show" id="zf3-4c-P4f"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -98,6 +99,36 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="658.60465116279067" y="-685.62231759656652"/>
+        </scene>
+        <!--Single Image View Controller-->
+        <scene sceneID="dpn-Iv-us3">
+            <objects>
+                <viewController id="gSj-bC-N5g" customClass="SingleImageViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="x7H-VJ-M7O">
+                        <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="CJR-Z4-Qyk">
+                                <rect key="frame" x="0.0" y="103" width="430" height="746"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="jRX-SP-uMy"/>
+                        <color key="backgroundColor" name="YP Black"/>
+                        <constraints>
+                            <constraint firstItem="CJR-Z4-Qyk" firstAttribute="bottom" secondItem="jRX-SP-uMy" secondAttribute="bottom" id="hp6-f6-dKj"/>
+                            <constraint firstItem="jRX-SP-uMy" firstAttribute="trailing" secondItem="CJR-Z4-Qyk" secondAttribute="trailing" id="jDa-DQ-YsL"/>
+                            <constraint firstItem="jRX-SP-uMy" firstAttribute="top" secondItem="CJR-Z4-Qyk" secondAttribute="top" id="vuC-0l-KtS"/>
+                            <constraint firstItem="CJR-Z4-Qyk" firstAttribute="leading" secondItem="jRX-SP-uMy" secondAttribute="leading" id="xgL-6d-f5v"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="40o-l9-BxM"/>
+                    <connections>
+                        <outlet property="imageView" destination="x7H-VJ-M7O" id="BHO-Np-U72"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uge-4n-at5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1470.6976744186047" y="-686.26609442060089"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="90X-B9-TSO">
