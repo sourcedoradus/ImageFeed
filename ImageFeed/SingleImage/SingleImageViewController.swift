@@ -8,5 +8,5 @@
 import UIKit
 
 final class SingleImageViewController: UIViewController {
-    @IBOutlet var imageView: UIView!
+    @IBOutlet var imageView: UIImageView!
 }
