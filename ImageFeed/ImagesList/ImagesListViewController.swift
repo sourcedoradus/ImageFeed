@@ -21,12 +21,16 @@ final class ImagesListViewController: UIViewController {
         return formatter
     }()
     
+    // MARK: - viewDidLoad
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.rowHeight = 200
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
     }
+
+    // MARK: - prepare
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == showSingleImageSegueIdentifier {
@@ -45,6 +49,8 @@ final class ImagesListViewController: UIViewController {
         }
     }
 }
+
+// MARK: - Extensions
 
 extension ImagesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
