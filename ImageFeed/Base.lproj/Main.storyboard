@@ -110,8 +110,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DRf-dA-2Mz">
+                                <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="CJR-Z4-Qyk">
+                                        <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
@@ -152,13 +154,13 @@
                         <color key="backgroundColor" name="YP Black"/>
                         <constraints>
                             <constraint firstItem="lew-HN-dkB" firstAttribute="centerX" secondItem="jRX-SP-uMy" secondAttribute="centerX" id="2G7-1V-D62"/>
-                            <constraint firstItem="jRX-SP-uMy" firstAttribute="leading" secondItem="DRf-dA-2Mz" secondAttribute="leading" id="BME-Pa-Z1e"/>
-                            <constraint firstItem="DRf-dA-2Mz" firstAttribute="trailing" secondItem="jRX-SP-uMy" secondAttribute="trailing" id="MFM-UO-fcg"/>
+                            <constraint firstAttribute="leading" secondItem="DRf-dA-2Mz" secondAttribute="leading" id="BME-Pa-Z1e"/>
+                            <constraint firstItem="DRf-dA-2Mz" firstAttribute="trailing" secondItem="x7H-VJ-M7O" secondAttribute="trailing" id="MFM-UO-fcg"/>
                             <constraint firstItem="sKW-Oy-keb" firstAttribute="leading" secondItem="jRX-SP-uMy" secondAttribute="leading" constant="9" id="TRy-Ex-sqz"/>
                             <constraint firstItem="lew-HN-dkB" firstAttribute="bottom" secondItem="jRX-SP-uMy" secondAttribute="bottom" constant="-17" id="Zqu-9S-nZ4"/>
-                            <constraint firstAttribute="top" secondItem="DRf-dA-2Mz" secondAttribute="top" constant="20" id="b6v-w4-Xlb"/>
+                            <constraint firstAttribute="top" secondItem="DRf-dA-2Mz" secondAttribute="top" id="b6v-w4-Xlb"/>
                             <constraint firstItem="sKW-Oy-keb" firstAttribute="top" secondItem="jRX-SP-uMy" secondAttribute="top" constant="9" id="mpS-KT-PJb"/>
-                            <constraint firstItem="DRf-dA-2Mz" firstAttribute="bottom" secondItem="x7H-VJ-M7O" secondAttribute="bottom" constant="20" id="sQK-yv-8cB"/>
+                            <constraint firstItem="DRf-dA-2Mz" firstAttribute="bottom" secondItem="x7H-VJ-M7O" secondAttribute="bottom" id="sQK-yv-8cB"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="40o-l9-BxM"/>
@@ -169,7 +171,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uge-4n-at5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="607" y="-686"/>
+            <point key="canvasLocation" x="606.97674418604652" y="-686.26609442060089"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="90X-B9-TSO">
