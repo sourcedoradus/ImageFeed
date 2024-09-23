@@ -14,7 +14,7 @@ final class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         // MARK: - Avatar image
         
         let avatarImage = UIImageView(image: UIImage(named: "Avatar"))
