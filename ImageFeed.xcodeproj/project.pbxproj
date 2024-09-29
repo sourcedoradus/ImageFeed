@@ -17,6 +17,7 @@
 		514AA4122C8A4F8300BC9285 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 514AA4112C8A4F8300BC9285 /* Assets.xcassets */; };
 		514AA4152C8A4F8300BC9285 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 514AA4142C8A4F8300BC9285 /* Base */; };
 		51A5B89A2CA5C55600D8CBD0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A5B8992CA5C55100D8CBD0 /* Constants.swift */; };
+		51A5B89D2CAA048A00D8CBD0 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A5B89C2CAA048700D8CBD0 /* AuthViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		514AA4142C8A4F8300BC9285 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		514AA4162C8A4F8300BC9285 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		51A5B8992CA5C55100D8CBD0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		51A5B89C2CAA048700D8CBD0 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 		514AA4072C8A4F8200BC9285 /* ImageFeed */ = {
 			isa = PBXGroup;
 			children = (
+				51A5B89B2CAA046500D8CBD0 /* AuthScreen */,
 				5109D7852C9CB2290046875D /* SingleImage */,
 				5109D7822C9631D60046875D /* Profile */,
 				5109D7812C8E14A20046875D /* ImagesList */,
@@ -101,6 +104,14 @@
 				514AA4162C8A4F8300BC9285 /* Info.plist */,
 			);
 			path = ImageFeed;
+			sourceTree = "<group>";
+		};
+		51A5B89B2CAA046500D8CBD0 /* AuthScreen */ = {
+			isa = PBXGroup;
+			children = (
+				51A5B89C2CAA048700D8CBD0 /* AuthViewController.swift */,
+			);
+			path = AuthScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -178,6 +189,7 @@
 				5109D7802C8E146C0046875D /* ImagesListCell.swift in Sources */,
 				5109D7842C9631EC0046875D /* ProfileViewController.swift in Sources */,
 				514AA4092C8A4F8200BC9285 /* AppDelegate.swift in Sources */,
+				51A5B89D2CAA048A00D8CBD0 /* AuthViewController.swift in Sources */,
 				51A5B89A2CA5C55600D8CBD0 /* Constants.swift in Sources */,
 				5109D7872C9CB23A0046875D /* SingleImageViewController.swift in Sources */,
 				514AA40B2C8A4F8200BC9285 /* SceneDelegate.swift in Sources */,
