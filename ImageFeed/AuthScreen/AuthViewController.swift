@@ -8,6 +8,11 @@
 import UIKit
 
 final class AuthViewController: UIViewController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureBackButton()
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowWebView" {
@@ -16,5 +21,12 @@ final class AuthViewController: UIViewController {
                 // Здесь можно передать данные в webViewVC, если нужно
             }
         }
+    }
+
+    private func configureBackButton() {
+        navigationController?.navigationBar.backIndicatorImage = UIImage(named: "nav_back_button") // 1
+        navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "nav_back_button") // 2
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil) // 3
+        navigationItem.backBarButtonItem?.tintColor = UIColor(named: "YP Black") // 4
     }
 }
