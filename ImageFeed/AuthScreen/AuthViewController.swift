@@ -11,14 +11,16 @@ import UIKit
 
 final class AuthViewController: UIViewController {
     
+    private let showWebViewSegueIdentifier = "ShowWebView"
+    
     // MARK: - viewDidLoad
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureBackButton()
     }
-
+    
     private func configureBackButton() {
         navigationController?.navigationBar.backIndicatorImage = UIImage(named: "nav_back_button")
         navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "nav_back_button")
