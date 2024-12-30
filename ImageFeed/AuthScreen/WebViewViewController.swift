@@ -8,6 +8,8 @@
 import UIKit
 import WebKit
 
+// MARK: - WebView class
+
 final class WebViewViewController: UIViewController {
     
     @IBOutlet private var webView: WKWebView!
