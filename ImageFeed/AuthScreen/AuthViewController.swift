@@ -12,6 +12,7 @@ import UIKit
 final class AuthViewController: UIViewController {
     
     private let showWebViewSegueIdentifier = "ShowWebView"
+    private let oauth2Service = OAuth2Service.shared
     
     // MARK: - viewDidLoad
     
