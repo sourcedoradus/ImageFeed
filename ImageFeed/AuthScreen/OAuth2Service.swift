@@ -26,6 +26,8 @@ final class OAuth2Service {
     
     private init() { }
     
+    // MARK: - OAuthTokenResponseBody struct
+    
     private struct OAuthTokenResponseBody: Codable {
         let accessToken: String
         
@@ -58,7 +60,7 @@ final class OAuth2Service {
         task.resume()
     }
     
-    // MARK: - makeOAuthTokenRequest
+    // MARK: - func makeOAuthTokenRequest
     
     private func makeOAuthTokenRequest(code: String) -> URLRequest? {
         guard

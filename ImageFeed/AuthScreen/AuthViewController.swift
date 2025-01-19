@@ -7,12 +7,19 @@
 
 import UIKit
 
+// MARK: - AuthViewControllerDelegate
+
+protocol AuthViewControllerDelegate: AnyObject {
+    func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String)
+}
+
 // MARK: - AuthView Class
 
 final class AuthViewController: UIViewController {
     
     private let showWebViewSegueIdentifier = "ShowWebView"
     private let oauth2Service = OAuth2Service.shared
+    weak var delegate: AuthViewControllerDelegate?
     
     // MARK: - viewDidLoad
     
@@ -22,7 +29,7 @@ final class AuthViewController: UIViewController {
         configureBackButton()
     }
     
-    // MARK: - Functions
+    // MARK: - func prepare
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == showWebViewSegueIdentifier {
@@ -38,6 +45,8 @@ final class AuthViewController: UIViewController {
         }
     }
     
+    // MARK: - func configureBackButton
+    
     private func configureBackButton() {
         navigationController?.navigationBar.backIndicatorImage = UIImage(named: "nav_back_button")
         navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "nav_back_button")
@@ -49,15 +58,11 @@ final class AuthViewController: UIViewController {
 // MARK: - Extension
 
 extension AuthViewController: WebViewViewControllerDelegate {
-    
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
-        vc.dismiss(animated: true)
-        oauth2Service.fetchOAuthToken(code) { [weak self] result in
-            guard let self = self else { return }
-        }
+        delegate?.authViewController(self, didAuthenticateWithCode: code)
     }
     
     func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
-        vc.dismiss(animated: true)
+        dismiss(animated: true)
     }
 }
