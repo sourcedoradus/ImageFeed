@@ -9,7 +9,6 @@ import UIKit
 
 final class ProfileViewController: UIViewController {
     
-    
     // MARK: - viewDidLoad
     
     override func viewDidLoad() {
