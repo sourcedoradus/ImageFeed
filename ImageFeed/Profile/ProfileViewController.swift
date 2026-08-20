@@ -63,11 +63,9 @@ final class ProfileViewController: UIViewController {
         
         // MARK: - Logout button
         
-        let logoutButton = UIButton.systemButton(
-            with: UIImage(systemName: "ipad.and.arrow.forward")!,
-            target: self,
-            action: #selector(Self.didTapLogoutButton)
-        )
+        let logoutButton = UIButton(type: .system)
+        logoutButton.setImage(UIImage(named: "LogoutButton"), for: .normal)
+        logoutButton.addTarget(self, action: #selector(Self.didTapLogoutButton), for: .touchUpInside)
         view.addSubview(logoutButton)
         
         logoutButton.translatesAutoresizingMaskIntoConstraints = false

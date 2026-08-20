@@ -10,7 +10,7 @@ import Foundation
 // MARK: - OAuth2TokenStorage Class
 
 final class OAuth2TokenStorage {
-    private let dataStorage =  UserDefaults.standard
+    private let dataStorage = UserDefaults.standard
     private let tokenKey = "token"
     
     var token: String? {

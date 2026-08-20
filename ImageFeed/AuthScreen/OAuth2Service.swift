@@ -14,6 +14,7 @@ final class OAuth2Service {
     
     private let dataStorage = OAuth2TokenStorage()
     private let urlSession = URLSession.shared
+    private var task: URLSessionTask?
     
     private(set) var authToken: String? {
         get {
@@ -39,6 +40,9 @@ final class OAuth2Service {
     // MARK: - fetchOAuthToken
     
     func fetchOAuthToken(_ code: String, completion: @escaping (Result<String, Error>) -> Void) {
+        assert(Thread.isMainThread)
+        guard task == nil else { return }
+        
         guard
             let request = makeOAuthTokenRequest(code: code)
         else {
@@ -48,6 +52,7 @@ final class OAuth2Service {
         
         let task = object(for: request) { [weak self] result in
             guard let self = self else { return }
+            self.task = nil
             switch result {
             case .success(let body):
                 let authToken = body.accessToken
@@ -57,6 +62,7 @@ final class OAuth2Service {
                 completion(.failure(error))
             }
         }
+        self.task = task
         task.resume()
     }
     

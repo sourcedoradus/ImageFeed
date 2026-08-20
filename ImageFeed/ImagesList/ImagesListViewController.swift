@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ImagesListViewController.swift
 //  ImageFeed
 //
 //  Created by Valentin Medvedev on 05.09.2024.
@@ -26,7 +26,6 @@ final class ImagesListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.rowHeight = 200
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
     }
     
@@ -76,12 +75,11 @@ extension ImagesListViewController {
             return
         }
         
-        cell.cellImage.image = image
-        cell.dateLabel.text = dateFormatter.string(from: Date())
-        
-        let isLiked = indexPath.row % 2 == 0
-        let likeImage = isLiked ? UIImage(named: "LikeButtonON") : UIImage(named: "LikeButtonOFF")
-        cell.likeButton.setImage(likeImage, for: .normal)
+        cell.configure(
+            image: image,
+            dateText: dateFormatter.string(from: Date()),
+            isLiked: indexPath.row % 2 == 0
+        )
     }
 }
 
