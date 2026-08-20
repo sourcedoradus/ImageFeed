@@ -1,10 +1,20 @@
 import UIKit
 
+final class ImagesListCell: UITableViewCell {
+    @IBOutlet private var cellImage: UIImageView!
+    @IBOutlet private var likeButton: UIButton!
+    @IBOutlet private var dateLabel: UILabel!
+    
+    func show(_ image: UIImage, _ date: String, liked: Bool) {
+        (cellImage.image, dateLabel.text) = (image, date)
+        likeButton.setImage(UIImage(named: liked ? "LikeButtonON" : "LikeButtonOFF"), for: .normal)
+    }
+}
+
 final class ImagesListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet private var tableView: UITableView!
-    
-    private let photosName = (0..<20).map(String.init)
-    private let dateFormatter: DateFormatter = {
+    private let photos = (0..<20).map(String.init)
+    private let formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "ru_RU")
         formatter.dateFormat = "d MMMM yyyy"
@@ -17,28 +27,16 @@ final class ImagesListViewController: UIViewController, UITableViewDataSource, U
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard
-            let viewController = segue.destination as? SingleImageViewController,
-            let indexPath = sender as? IndexPath
-        else { return }
-        viewController.image = UIImage(named: photosName[indexPath.row])
+        guard let index = sender as? IndexPath else { return }
+        (segue.destination as? SingleImageViewController)?.image = UIImage(named: photos[index.row])
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        photosName.count
-    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { photos.count }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(
-            withIdentifier: ImagesListCell.reuseIdentifier,
-            for: indexPath
-        ) as! ImagesListCell
-        if let image = UIImage(named: photosName[indexPath.row]) {
-            cell.configure(
-                image: image,
-                dateText: dateFormatter.string(from: Date()),
-                isLiked: indexPath.row % 2 == 0
-            )
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ImagesListCell", for: indexPath) as! ImagesListCell
+        UIImage(named: photos[indexPath.row]).map {
+            cell.show($0, formatter.string(from: Date()), liked: indexPath.row.isMultiple(of: 2))
         }
         return cell
     }
@@ -48,9 +46,8 @@ final class ImagesListViewController: UIViewController, UITableViewDataSource, U
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let image = UIImage(named: photosName[indexPath.row]) else { return 0 }
-        let insets = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
-        let scale = (tableView.bounds.width - insets.left - insets.right) / image.size.width
-        return image.size.height * scale + insets.top + insets.bottom
+        guard let image = UIImage(named: photos[indexPath.row]) else { return 0 }
+        let width = tableView.bounds.width - 32
+        return image.size.height * (width / image.size.width) + 8
     }
 }
