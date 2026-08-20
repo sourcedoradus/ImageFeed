@@ -1,13 +1,4 @@
-//
-//  URLSession+data.swift
-//  ImageFeed
-//
-//  Created by Valentin Medvedev on 18.01.2025.
-//
-
 import Foundation
-
-// MARK: - NetworkError enum
 
 enum NetworkError: Error {
     case httpStatusCode(Int)
@@ -17,33 +8,32 @@ enum NetworkError: Error {
     case decodingError(Error)
 }
 
-// MARK: - URLSession Extension
-
 extension URLSession {
-    func data(
-        for request: URLRequest,
-        completion: @escaping (Result<Data, Error>) -> Void
-    ) -> URLSessionTask {
-        let fulfillCompletionOnTheMainThread: (Result<Data, Error>) -> Void = { result in
-            DispatchQueue.main.async {
-                completion(result)
-            }
-        }
-        
-        let task = dataTask(with: request, completionHandler: { data, response, error in
-            if let data = data, let response = response, let statusCode = (response as? HTTPURLResponse)?.statusCode {
-                if 200 ..< 300 ~= statusCode {
-                    fulfillCompletionOnTheMainThread(.success(data))
-                } else {
-                    fulfillCompletionOnTheMainThread(.failure(NetworkError.httpStatusCode(statusCode)))
-                }
-            } else if let error = error {
-                fulfillCompletionOnTheMainThread(.failure(NetworkError.urlRequestError(error)))
+    func data(for request: URLRequest, completion: @escaping (Result<Data, Error>) -> Void) -> URLSessionTask {
+        dataTask(with: request) { data, response, error in
+            let result: Result<Data, Error>
+            if let data, let status = (response as? HTTPURLResponse)?.statusCode {
+                result = (200..<300).contains(status)
+                    ? .success(data)
+                    : .failure(NetworkError.httpStatusCode(status))
+            } else if let error {
+                result = .failure(NetworkError.urlRequestError(error))
             } else {
-                fulfillCompletionOnTheMainThread(.failure(NetworkError.urlSessionError))
+                result = .failure(NetworkError.urlSessionError)
             }
-        })
-        
-        return task
+            DispatchQueue.main.async { completion(result) }
+        }
+    }
+    
+    func object<T: Decodable>(
+        for request: URLRequest,
+        completion: @escaping (Result<T, Error>) -> Void
+    ) -> URLSessionTask {
+        data(for: request) { result in
+            completion(result.flatMap { data in
+                Result { try JSONDecoder().decode(T.self, from: data) }
+                    .mapError(NetworkError.decodingError)
+            })
+        }
     }
 }
