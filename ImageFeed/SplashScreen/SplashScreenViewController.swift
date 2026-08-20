@@ -1,99 +1,38 @@
-//
-//  SplashScreenViewController.swift
-//  ImageFeed
-//
-//  Created by Valentin Medvedev on 18.01.2025.
-//
-
 import UIKit
 
-// MARK: - SplashViewController Class
-
-final class SplashViewController: UIViewController {
-    
-    private let showAuthenticationScreenSegueIdentifier = "ShowAuthenticationScreen"
-    private let oauth2Service = OAuth2Service.shared
-    private let oauth2TokenStorage = OAuth2TokenStorage()
-    
-    // MARK: - func viewDidAppear
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        if oauth2TokenStorage.token != nil {
-            switchToTabBarController()
-        } else if presentedViewController == nil {
-            performSegue(withIdentifier: showAuthenticationScreenSegueIdentifier, sender: nil)
-        }
-    }
-    
-    // MARK: - func viewWillAppear
+final class SplashViewController: UIViewController, WebViewViewControllerDelegate {
+    override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNeedsStatusBarAppearanceUpdate()
     }
     
-    // MARK: - var preferredStatusBarStyle
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        .lightContent
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if OAuth2Service.shared.authToken != nil {
+            switchToTabBarController()
+        } else if presentedViewController == nil {
+            performSegue(withIdentifier: "ShowAuthenticationScreen", sender: nil)
+        }
     }
     
-    // MARK: - func switchToTabBarController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        (segue.destination as? UINavigationController)?
+            .viewControllers.first
+            .flatMap { $0 as? AuthViewController }?
+            .delegate = self
+    }
+    
+    func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
+        OAuth2Service.shared.fetchOAuthToken(code) { [weak self] result in
+            if case .success = result { self?.switchToTabBarController() }
+        }
+    }
     
     private func switchToTabBarController() {
-        guard let window = view.window ?? UIApplication.shared.connectedScenes
-            .compactMap({ $0 as? UIWindowScene })
-            .flatMap({ $0.windows })
-            .first(where: \.isKeyWindow)
-        else {
-            assertionFailure("Invalid Configuration")
-            return
-        }
-        
-        let tabBarController = UIStoryboard(name: "Main", bundle: .main)
+        guard let window = view.window else { return }
+        window.rootViewController = UIStoryboard(name: "Main", bundle: .main)
             .instantiateViewController(withIdentifier: "TabBarViewController")
-        window.rootViewController = tabBarController
-    }
-}
-
-// MARK: - SplashViewController Extension
-
-extension SplashViewController {
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == showAuthenticationScreenSegueIdentifier {
-            guard
-                let navigationController = segue.destination as? UINavigationController,
-                let viewController = navigationController.viewControllers.first as? AuthViewController
-            else {
-                assertionFailure("Failed to prepare for \(showAuthenticationScreenSegueIdentifier)")
-                return
-            }
-            viewController.delegate = self
-        } else {
-            super.prepare(for: segue, sender: sender)
-        }
-    }
-}
-
-// MARK: - AuthViewControllerDelegate
-
-extension SplashViewController: AuthViewControllerDelegate {
-    func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
-        fetchOAuthToken(code)
-    }
-    
-    private func fetchOAuthToken(_ code: String) {
-        oauth2Service.fetchOAuthToken(code) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success:
-                self.switchToTabBarController()
-            case .failure:
-                // TODO [Sprint 11]
-                break
-            }
-        }
     }
 }
