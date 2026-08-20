@@ -1,10 +1,3 @@
-//
-//  ImagesListCell.swift
-//  ImageFeed
-//
-//  Created by Valentin Medvedev on 08.09.2024.
-//
-
 import UIKit
 
 final class ImagesListCell: UITableViewCell {
@@ -17,8 +10,6 @@ final class ImagesListCell: UITableViewCell {
     func configure(image: UIImage, dateText: String, isLiked: Bool) {
         cellImage.image = image
         dateLabel.text = dateText
-        
-        let likeImage = isLiked ? UIImage(named: "LikeButtonON") : UIImage(named: "LikeButtonOFF")
-        likeButton.setImage(likeImage, for: .normal)
+        likeButton.setImage(UIImage(named: isLiked ? "LikeButtonON" : "LikeButtonOFF"), for: .normal)
     }
 }
